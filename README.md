@@ -17,3 +17,6 @@ clone下来后执行 go build生成可执行文件fileupload
 2、结合数据库；
 
 3、增加登录认证
+
+![image](https://github.com/Ysach/fileupload/static/img/file.png)
+![image](https://github.com/Ysach/fileupload/static/img/login.png)
