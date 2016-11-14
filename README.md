@@ -18,5 +18,7 @@ clone下来后执行 go build生成可执行文件fileupload
 
 3、增加登录认证
 
-![image](https://github.com/Ysach/fileupload/static/img/file.png)
-![image](https://github.com/Ysach/fileupload/static/img/login.png)
+
+![image](https://github.com/Ysach/fileupload/blob/master/static/img/file.png)
+
+![image](https://github.com/Ysach/fileupload/blob/master/static/img/login.png)
