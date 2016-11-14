@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/plugins/css/fileinput.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/static/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="/static/confirm/jquery-confirm.min.css" rel="stylesheet">
+    <link href="/static/css/center-div.css" rel="stylesheet">
+
+</head>
+<body style="background-image: url(/static/img/background.jpg)">
+
+<div class="top" role="main" style="background-color: white">
+    <div class="col-md-1">
+
+    </div>
+</div>
+
+    <div class="right_col" role="main" style="background-color: white">
+        <div class="center-div">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-right">
+                    <div class="panel-body">
+                        <div class="pad-ver">
+
+                            <div class="btn-group bootstrap-select">
+                                <button type="button" class="btn dropdown-toggle selectpicker btn-info" data-toggle="dropdown" data-id="task_type" title="上传文件">
+                                    <span class="filter-option pull-left">上传文件</span>&nbsp;<span class="caret">
+                                </span>
+                                </button>
+                                <div class="dropdown-menu open">
+                                    <ul class="dropdown-menu inner selectpicker" role="menu">
+                                        <li data-original-index="0" class="selected">
+                                            <a tabindex="0" class="" data-normalized-text="上传文件">
+                                                <span class="text">上传文件</span><span class="fa fa-check check-mark"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <input id="file_upload" name="filename" type="file" multiple class="file-loading">
+                            <div id="return-msgs"></div>
+                            <div id="result-box">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/plugins/js/fileinput.min.js"></script>
+<script src="/static/plugins/js/plugins/canvas-to-blob.js"></script>
+<script src="/static/plugins/js/locales/zh.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        upload_files = [];
+
+        $("#file_upload").fileinput({
+            uploadUrl: "http://127.0.0.1:9090/upload", // server upload action
+            uploadAsync: true,
+            language:'zh',
+            maxFileSize:50000,
+            maxFileCount: 5,
+            //allowedFileExtensions : ['mp3'],
+
+        });
+        $('#file_upload').on('fileuploaded', function(event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                    response = data.response, reader = data.reader;
+
+            console.log(response);
+            upload_files.push(response.uploaded_file_path);
+        });
+
+
+        $("#task_type").on("change",function(){
+            if (this.value == 'file_send'){
+                $(".file-input").removeClass("hide");
+                $("#file-download-to-local").addClass("hide")
+            }else{
+                $(".file-input").addClass("hide");
+                $("#file-download-to-local").removeClass("hide")
+            }
+
+        });//end on change
+
+
+    });
+
+
+</script>
