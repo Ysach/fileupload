@@ -12,11 +12,21 @@ import (
 	//"encoding/json"
 	//"log"
 	//"io/ioutil"
+	"encoding/json"
 )
 
 type test_struct struct {
 	Test string
 }
+
+type ReturnRes struct {
+	Status string `json:"status"`
+}
+
+type ReturnSlice struct {
+	ResStatus []ReturnRes `json:"resStatus"`
+}
+
 // 处理/upload 逻辑
 func Upload(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //获取请求的方法
@@ -62,7 +72,11 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		}
 		defer f.Close()
 		io.Copy(f, file)
-		res := `{"sucess": "sucess"}`
-		fmt.Fprintf(w, res)
+		//res := `{"sucess": "sucess"}`
+		var res ReturnSlice
+		res.ResStatus = append(res.ResStatus, ReturnRes{Status:"Success"})
+		b, _ := json.Marshal(res)
+
+		fmt.Fprintf(w, string(b))
 	}
 }
